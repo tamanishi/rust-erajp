@@ -1,4 +1,4 @@
-# rust-erajp
+# rust_erajp
 
 Rust library for japanese era.  
 This is a sample inspired from [go-erajp](https://github.com/mattn/go-erajp).
