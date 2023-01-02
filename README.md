@@ -9,6 +9,14 @@ This is a sample inspired from [go-erajp](https://github.com/mattn/go-erajp).
 println!("{}", rust_erajp::to_era(2023));
 ```
 
+## Examples
+
+```sh
+cargo run --example to_era
+cargo run --example to_era_from_time
+cargo run --example find
+```
+
 ## License
 
 MIT
