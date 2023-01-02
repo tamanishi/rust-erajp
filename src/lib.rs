@@ -35,7 +35,7 @@ pub fn to_era_from_time(date_time: DateTime<Local>) -> Option<&'static str> {
     return None;
 }
 
-// FindEra return EraItem.
+// find return EraItem.
 pub fn find(date_time: DateTime<Local>) -> Option<&'static EraItem> {
     for i in (0..table::ERAS.len()).rev() {
         let tz = Asia__Tokyo;
