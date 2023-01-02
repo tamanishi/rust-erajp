@@ -3,12 +3,13 @@ use chrono_tz::Tz::Asia__Tokyo;
 
 mod table;
 use table::EraItem;
+use table::ERAS;
 
 // to_era returns era name from year.
 pub fn to_era(year: i32) -> Option<&'static str> {
-    for i in (0..table::ERAS.len()).rev() {
-        if table::ERAS[i].year <= year {
-            return Some(table::ERAS[i].name);
+    for i in (0..ERAS.len()).rev() {
+        if ERAS[i].year <= year {
+            return Some(ERAS[i].name);
         };
     }
     return None;
@@ -16,20 +17,20 @@ pub fn to_era(year: i32) -> Option<&'static str> {
 
 // to_era_from_time returns era name from DateTime.
 pub fn to_era_from_time(date_time: DateTime<Local>) -> Option<&'static str> {
-    for i in (0..table::ERAS.len()).rev() {
+    for i in (0..ERAS.len()).rev() {
         let tz = Asia__Tokyo;
         let et = tz
             .with_ymd_and_hms(
-                table::ERAS[i].year,
-                table::ERAS[i].month,
-                table::ERAS[i].day,
+                ERAS[i].year,
+                ERAS[i].month,
+                ERAS[i].day,
                 0,
                 0,
                 0,
             )
             .unwrap();
         if date_time.gt(&et) {
-            return Some(table::ERAS[i].name);
+            return Some(ERAS[i].name);
         };
     }
     return None;
@@ -37,20 +38,20 @@ pub fn to_era_from_time(date_time: DateTime<Local>) -> Option<&'static str> {
 
 // find returns EraItem.
 pub fn find(date_time: DateTime<Local>) -> Option<&'static EraItem> {
-    for i in (0..table::ERAS.len()).rev() {
+    for i in (0..ERAS.len()).rev() {
         let tz = Asia__Tokyo;
         let et = tz
             .with_ymd_and_hms(
-                table::ERAS[i].year,
-                table::ERAS[i].month,
-                table::ERAS[i].day,
+                ERAS[i].year,
+                ERAS[i].month,
+                ERAS[i].day,
                 0,
                 0,
                 0,
             )
             .unwrap();
         if date_time.gt(&et) {
-            return Some(&table::ERAS[i]);
+            return Some(&ERAS[i]);
         };
     }
     return None;
