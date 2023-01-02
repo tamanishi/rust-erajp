@@ -5,17 +5,17 @@ mod table;
 use table::EraItem;
 
 // to_era return era name from year.
-pub fn to_era(year: i32) -> &'static str {
+pub fn to_era(year: i32) -> Option<&'static str> {
     for i in (0..table::ERAS.len()).rev() {
         if table::ERAS[i].year <= year {
-            return table::ERAS[i].name;
+            return Some(table::ERAS[i].name);
         };
     }
-    return "";
+    return None;
 }
 
 // to_era_from_time return era name from DateTime.
-pub fn to_era_from_time(date_time: DateTime<Local>) -> &'static str {
+pub fn to_era_from_time(date_time: DateTime<Local>) -> Option<&'static str> {
     for i in (0..table::ERAS.len()).rev() {
         let tz = Asia__Tokyo;
         let et = tz
@@ -29,10 +29,10 @@ pub fn to_era_from_time(date_time: DateTime<Local>) -> &'static str {
             )
             .unwrap();
         if date_time.gt(&et) {
-            return table::ERAS[i].name;
+            return Some(table::ERAS[i].name);
         };
     }
-    return "";
+    return None;
 }
 
 // FindEra return EraItem.
@@ -111,7 +111,7 @@ mod tests {
     #[test]
     fn test_to_era() {
         for test_case in TESTCASES {
-            let result: &str = to_era(test_case.year);
+            let result: &str = to_era(test_case.year).unwrap();
             assert_eq!(result, test_case.era);
         }
     }
@@ -119,7 +119,7 @@ mod tests {
     #[test]
     fn test_now() {
         let now = Local::now();
-        let result: &str = to_era_from_time(now);
+        let result: &str = to_era_from_time(now).unwrap();
         assert_eq!(result, "令和");
     }
 
