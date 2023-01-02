@@ -4,7 +4,7 @@ use chrono_tz::Tz::Asia__Tokyo;
 mod table;
 use table::EraItem;
 
-// to_era return era name from year.
+// to_era returns era name from year.
 pub fn to_era(year: i32) -> Option<&'static str> {
     for i in (0..table::ERAS.len()).rev() {
         if table::ERAS[i].year <= year {
@@ -14,7 +14,7 @@ pub fn to_era(year: i32) -> Option<&'static str> {
     return None;
 }
 
-// to_era_from_time return era name from DateTime.
+// to_era_from_time returns era name from DateTime.
 pub fn to_era_from_time(date_time: DateTime<Local>) -> Option<&'static str> {
     for i in (0..table::ERAS.len()).rev() {
         let tz = Asia__Tokyo;
@@ -35,7 +35,7 @@ pub fn to_era_from_time(date_time: DateTime<Local>) -> Option<&'static str> {
     return None;
 }
 
-// find return EraItem.
+// find returns EraItem.
 pub fn find(date_time: DateTime<Local>) -> Option<&'static EraItem> {
     for i in (0..table::ERAS.len()).rev() {
         let tz = Asia__Tokyo;
