@@ -15,3 +15,4 @@ MIT
 
 ## Todo
 - 寛永への改元日(1624/2/30)は何とかなるのか
+    - [日本では明治6年にグレゴリオ暦が採用された](https://www1.kaiho.mlit.go.jp/KOHO/faq/reki/shinreki.html)とのこと
