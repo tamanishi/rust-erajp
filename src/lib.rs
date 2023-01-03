@@ -134,7 +134,6 @@ mod tests {
     #[test]
     fn test_find_not_found() {
         let before_era = Local.with_ymd_and_hms(640, 1, 1, 0, 0, 0).unwrap();
-        // it fails. chrono may not be able to handle 1624/2/30 (寛永 established date)
         let result: Option<&'static EraItem> = find(before_era);
         assert!(result.is_none());
     }
