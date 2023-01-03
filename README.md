@@ -6,7 +6,7 @@ This is a sample inspired from [go-erajp](https://github.com/mattn/go-erajp).
 ## Usage
 
 ```rust
-println!("{}", rust_erajp::to_era(2023));
+println!("{}", rust_erajp::to_era(2023));   // 令和
 ```
 
 ## Examples
