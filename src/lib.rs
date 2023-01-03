@@ -7,52 +7,38 @@ use table::ERAS;
 
 // to_era returns era name from year.
 pub fn to_era(year: i32) -> Option<&'static str> {
-    for i in (0..ERAS.len()).rev() {
-        if ERAS[i].year <= year {
-            return Some(ERAS[i].name);
-        };
+    for era in ERAS.iter().rev() {
+        if era.year <= year {
+            return Some(era.name);
+        }
     }
     return None;
 }
 
 // to_era_from_time returns era name from DateTime.
 pub fn to_era_from_time(date_time: DateTime<Local>) -> Option<&'static str> {
-    for i in (0..ERAS.len()).rev() {
+    for era in ERAS.iter().rev() {
         let tz = Asia__Tokyo;
         let et = tz
-            .with_ymd_and_hms(
-                ERAS[i].year,
-                ERAS[i].month,
-                ERAS[i].day,
-                0,
-                0,
-                0,
-            )
+            .with_ymd_and_hms(era.year, era.month, era.day, 0, 0, 0)
             .unwrap();
         if date_time.gt(&et) {
-            return Some(ERAS[i].name);
-        };
+            return Some(era.name);
+        }
     }
     return None;
 }
 
 // find returns EraItem.
 pub fn find(date_time: DateTime<Local>) -> Option<&'static EraItem> {
-    for i in (0..ERAS.len()).rev() {
+    for era in ERAS.iter().rev() {
         let tz = Asia__Tokyo;
         let et = tz
-            .with_ymd_and_hms(
-                ERAS[i].year,
-                ERAS[i].month,
-                ERAS[i].day,
-                0,
-                0,
-                0,
-            )
+            .with_ymd_and_hms(era.year, era.month, era.day, 0, 0, 0)
             .unwrap();
         if date_time.gt(&et) {
-            return Some(&ERAS[i]);
-        };
+            return Some(&era);
+        }
     }
     return None;
 }
@@ -118,10 +104,23 @@ mod tests {
     }
 
     #[test]
-    fn test_now() {
+    fn test_to_era_too_old() {
+        let result: Option<&str> = to_era(640);
+        assert!(result.is_none());
+    }
+
+    #[test]
+    fn test_to_era_from_time_now() {
         let now = Local::now();
         let result: &str = to_era_from_time(now).unwrap();
         assert_eq!(result, "令和");
+    }
+
+    #[test]
+    fn test_to_era_from_time_too_old() {
+        let before_era = Local.with_ymd_and_hms(640, 1, 1, 0, 0, 0).unwrap();
+        let result: Option<&str> = to_era_from_time(before_era);
+        assert!(result.is_none());
     }
 
     #[test]
